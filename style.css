@@ -1,0 +1,269 @@
+:root {
+  --primary-color: #4a90e2;
+  --secondary-color: #f39c12;
+  --accent-color: #2ecc71;
+  --bg-color: #f5f6fa;
+  --menu-bg: rgba(255, 255, 255, 0.95);
+  --text-color: #2c3e50;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --border-radius: 12px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Menu Styles */
+#menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  background: var(--menu-bg);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+#menu li {
+  list-style: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  background: white;
+  color: var(--text-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+}
+
+#menu li:first-child {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 15px;
+}
+
+#menu li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Style for select element */
+#menu select {
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--primary-color);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  cursor: pointer;
+  background: white;
+  transition: var(--transition);
+}
+
+#menu select:hover {
+  border-color: var(--secondary-color);
+}
+
+/* branding text */
+.brand{
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+
+/* Puzzle Board Styles */
+#forPuzzle {
+  position: fixed;
+  width: 90vw;
+  height: calc(100vh - 140px);
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+/* Puzzle Pieces Styles */
+.polypiece {
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  transition: transform 0.2s ease;
+  cursor: grab;
+  border-radius: 4px;
+}
+
+.polypiece:active {
+  cursor: grabbing;
+  transform: scale(1.05);
+  z-index: 1001;
+}
+
+.moving {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Completion Overlay Styles */
+.completion-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Increased z-index */
+  touch-action: none; /* Prevent scrolling on mobile */
+}
+
+.completion-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 90%;
+  width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: popIn 0.5s ease-out;
+  z-index: 10000; /* Ensure card is above overlay */
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.completion-title {
+  color: #2c3e50;
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+}
+
+.completion-message {
+  color: #34495e;
+  font-size: 1.7rem;
+  margin-bottom: 2rem;
+}
+
+.completion-stats {
+  background: #f7f9fc;
+  padding: 1.7rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+}
+
+.stat-item {
+  color: #7f8c8d;
+  margin: 0.8rem 0;
+  font-size: 1.5rem;
+}
+
+.restart-button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 1.5rem 2.9rem;
+  border-radius: 50px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+  user-select: none; /* Prevent text selection */
+  touch-action: manipulation; /* Optimize for touch */
+  min-width: 150px; /* Ensure minimum tappable area */
+  min-height: 44px; /* Minimum touch target size */
+}
+
+.restart-button:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #menu {
+    width: 96%;
+    padding: 10px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #menu li {
+    margin: 5px 0;
+    text-align: center;
+    padding: 12px 20px;
+  }
+
+  #forPuzzle {
+    width: 95vw;
+    height: calc(100vh - 180px);
+    top: 120px;
+  }
+
+  .completion-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .restart-button {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.4rem;
+    width: 80%; /* Wider button on mobile */
+    margin: 0 auto; /* Center button */
+  }
+}
+
+@media (max-width: 480px) {
+  #menu li {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+
+  #menu select {
+    padding: 8px 15px;
+    font-size: 0.85rem;
+  }
+
+  #forPuzzle {
+    width: 100vw;
+    height: calc(100vh - 160px);
+    top: 110px;
+    border-radius: 15px;
+  }
+
+  /* Tambahkan touch target yang lebih besar */
+  #menu li, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
